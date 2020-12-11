@@ -1,0 +1,40 @@
+<wxs src="../../common/wxs/tools.wxs" module="tools" />
+<view class="g-container p-container">
+  <navbar title="保利威云会议" showIcon="{{false}}" hideIcon="{{true}}"></navbar>
+  <view class="p-body">
+    <view class="p-invite-name">{{inviteNickName}} 邀请你参加</view>
+    <view class="p-invite-theme g-hidden-text">{{meetingDetail.topic}}</view>
+    <view class="p-invite-no">
+      <image class="i-no" src="/images/subscribe-meeting/no@2x.png"></image>
+      <text>{{tools.formatRoomNo(meetingDetail.roomNo)}}</text>
+    </view>
+    <view class="p-box">
+      <view class="p-box-item">
+        <view class="p-label {{meetingDetail.type == 1 ? 'p-label-subscribe' : ''}}">主持人</view>
+        <text>{{meetingDetail.nickName}}</text>
+      </view>
+      <view class="p-box-item {{meetingDetail.type == 2 ? 'p-box-item-2' : ''}}">
+        <view class="p-label {{meetingDetail.type == 1 ? 'p-label-subscribe' : ''}}">
+          {{meetingDetail.type == 1 ? '预约时间' : '时间'}}</view>
+        <text>{{meetingDetail.beginDate}}</text>
+      </view>
+      <view class="p-box-item" wx:if="{{meetingDetail.type == 1}}">
+        <view class="p-label {{meetingDetail.type == 1 ? 'p-label-subscribe' : ''}}">预估时长</view>
+        <text>{{tools.toHourMinute(meetingDetail.duration)}}</text>
+      </view>
+      <view class="p-box-item" wx:if="{{meetingDetail.type == 2}}">
+        <view class="p-label p-label-subscribe">参会人</view>
+        <view class="p-vertical-top">{{meetingDetail.conferees}}</view>
+      </view>
+    </view>
+    <form bindsubmit="formSubmit" report-submit="true">
+      <button class="p-btn {{meetingDetail.status == 2 ? 'p-btn-disabled' : ''}}" bindtap="join" form-type="submit"
+        wx:if="{{sessionId}}">{{meetingDetail.status == 1 ? '立即参与' : (meetingDetail.status == 2 ? '已结束' : '接受预约')}}</button>
+      <button class="p-btn {{meetingDetail.status == 2 ? 'p-btn-disabled' : ''}}" open-type="getUserInfo"
+        form-type="submit" lang="zh_CN" bindgetuserinfo="getUserInfo"
+        wx:else>{{meetingDetail.status == 1 ? '立即参与' : (meetingDetail.status == 2 ? '已结束' : '接受预约')}}</button>
+    </form>
+    <view class="p-btn p-btn-no" bindtap="noJoin">
+      {{meetingDetail.status == 1 ? '忽略' : (meetingDetail.status == 2 ? '返回首页' : '暂不参与')}}</view>
+  </view>
+</view>

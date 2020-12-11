@@ -1,0 +1,70 @@
+/**
+ * @Author: Chenyintang
+ * @Date:   2019-06-09 12:37:59
+ * @Email:  chenytrl@163.com
+ * @Last modified by:   Chenyintang
+ * @Last modified time: 2019-06-09 13:07:00
+ */
+
+function countDown(endTime) {
+  const newTime = getDate().getTime();
+  const _endTime = getDate(endTime).getTime();
+  let text = '';
+
+  if (_endTime - newTime > 0) {
+    const time = (_endTime - newTime) / 1000;
+    // 获取天、时、分、秒
+    const days = parseInt(time / (60 * 60 * 24));
+    const hours = parseInt(time % (60 * 60 * 24) / 3600);
+    const min = parseInt(time % (60 * 60 * 24) % 3600 / 60);
+    // let sec = parseInt(time % (60 * 60 * 24) % 3600 % 60);
+    if (days > 0) {
+      text = days + '天后';
+    } else if (hours >= 1) {
+      text = hours + '小时后';
+    } else if (min >= 1) {
+      text = min + '分钟后';
+    }
+  }
+  return text;
+}
+
+/**
+ * 格式化房间号
+ * @param roomno
+ */
+function formatRoomNo(roomno) {
+  if (!roomno) return '';
+  var roomno = roomno + '';
+  return roomno.substring(0, 3) + ' ' + roomno.substring(3);
+}
+
+/**
+ * 将2019/06/01 格式化为 06月01日
+ * @param date
+ */
+function formatDate(date) {
+  if (!date) return '';
+  var _date = date.split('/');
+  return _date[1] + '月' + _date[2] + '日';
+}
+
+/**
+ * 将分钟转换为 xx小时xx分钟
+ * @param minutes
+ */
+function toHourMinute(minutes) {
+  if (!minutes) return '0小时0分钟';
+  // var _hours = Math.floor(minutes / 60) < 10 ? '0' + Math.floor(minutes / 60) : Math.floor(minutes / 60);
+  // var _minutes = (minutes % 60) < 10 ? '0' + (minutes % 60) : minutes % 60;
+  var _hours = Math.floor(minutes / 60);
+  var _minutes = minutes % 60;
+  return _hours + '小时' + _minutes + '分钟';
+}
+
+module.exports = {
+  countDown: countDown,
+  formatRoomNo: formatRoomNo,
+  formatDate: formatDate,
+  toHourMinute: toHourMinute
+};

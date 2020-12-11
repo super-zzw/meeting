@@ -1,0 +1,7 @@
+$hoverColor: #005bac;
+
+@mixin insideLink {
+  transition-duration: 0.4s;
+  transition-property: color, background;
+  cursor: pointer;
+}

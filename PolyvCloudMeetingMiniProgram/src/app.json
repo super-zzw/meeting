@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/subscribe-meeting/subscribe-meeting",
+    "pages/launch-meeting/launch-meeting",
+    "pages/join-meeting/join-meeting",
+    "pages/subscribe-meeting-result/subscribe-meeting-result",
+    "pages/meeting-invitation/meeting-invitation",
+    "pages/subscribe-meeting-detail/subscribe-meeting-detail",
+    "pages/meeting/meeting",
+    "pages/ppt/ppt"
+  ],
+  "window": {
+    "backgroundColorTop": "#fff",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "保利威云会议",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 0,
+    "enablePullDownRefresh": false,
+    "navigationStyle": "custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

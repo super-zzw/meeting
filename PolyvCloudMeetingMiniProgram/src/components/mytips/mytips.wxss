@@ -1,0 +1,40 @@
+.c-mytips {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999999999999;
+  display: flex;
+  justify-content: center;
+  transform: translateZ(0) translateY(-128rpx);
+  transition: all 0.3s ease;
+}
+
+.c-mytips-show {
+  transform: translateZ(0) translateY(0);
+}
+
+.c-mytips .c-mytips-box {
+  width: 100%;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 30rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: #fff;
+}
+
+.mytips .mytips-box.c-mytips-success {
+  background: green;
+}
+
+.c-mytips .c-mytips-box.c-mytips-warning {
+  /* background: linear-gradient(rgba(230, 67, 64, 1) rgba(255, 91, 91, 1)); */
+  background: rgba(230, 67, 64, 1);
+}
+
+.c-mytips .c-mytips-box.c-mytips-error {
+  /* background: linear-gradient(top, rgba(230, 67, 64, 1) rgba(255, 91, 91, 1)); */
+  background: rgba(230, 67, 64, 1);
+}

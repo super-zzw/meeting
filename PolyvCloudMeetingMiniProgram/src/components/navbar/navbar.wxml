@@ -1,0 +1,15 @@
+<view style="height:{{titleBarHeight}}px; padding-top:{{statusBarHeight}}px; background-color:#fff;">
+  <view class="c-header" style="height:{{titleBarHeight}}px;padding-top:{{statusBarHeight}}px;background: {{bgColor}};">
+    <view class="c-title-bar">
+      <view class="c-back" bindtap="headerBack" wx:if="{{!hideIcon}}">
+        <button open-type="share" class="c-btn-share" wx:if="{{isShowShare}}">
+          <image class="c-icon-back" src="/images/common/btn-share@2x.png"></image>
+        </button>
+        <image wx:if="{{!isShowShare && showBackIcon}}" class="c-icon-back" src="/images/common/btn-back@2x.png">
+        </image>
+        <image wx:if="{{!isShowShare && !showBackIcon}}" class="c-icon-home" src="{{logoIcon}}"></image>
+      </view>
+    </view>
+    <view class="c-header-title">{{title}}</view>
+  </view>
+</view>

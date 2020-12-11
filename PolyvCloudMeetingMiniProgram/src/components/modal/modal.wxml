@@ -1,0 +1,12 @@
+<view class='c-mask' wx:if='{{show}}' bindtap='clickMask'>
+  <view class='c-modal-content'>
+    <scroll-view scroll-y class='c-main-content'>
+      <slot></slot>
+    </scroll-view>
+    <view class='c-modal-btn-wrapper' wx:if="{{confirmBtn || cancelBtn}}">
+      <view class='c-cancel-btn' bindtap='cancel' wx:if="{{cancelBtn}}">{{cancelText}}</view>
+      <!-- <button class='c-confirm-btn' bindtap='confirm' wx:if="{{confirmBtn}}">{{confirmText}}</button> -->
+      <view class='c-confirm-btn' bindtap='confirm' wx:if="{{confirmBtn}}">{{confirmText}}</view>
+    </view>
+  </view>
+</view>

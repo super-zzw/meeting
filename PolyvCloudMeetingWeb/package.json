@@ -1,0 +1,39 @@
+{
+  "name": "polyv-cloud-meeting-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "aes-js": "^3.1.2",
+    "agora-rtc-sdk": "^2.8.0",
+    "axios": "^0.19.0",
+    "clipboard": "^2.0.4",
+    "core-js": "^2.6.5",
+    "events": "^3.0.0",
+    "js-base64": "^2.5.1",
+    "md5": "^2.2.1",
+    "qs": "^6.7.0",
+    "socket.io-client": "^2.2.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-sonarjs": "^0.3.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "sass": "^1.18.0",
+    "sass-loader": "^7.1.0",
+    "vue-notification": "^1.3.16",
+    "vue-template-compiler": "^2.6.10"
+  }
+}

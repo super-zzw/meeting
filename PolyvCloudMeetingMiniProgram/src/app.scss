@@ -1,0 +1,76 @@
+@import "./common/styles/variable.scss";
+@import "./components/mytips/mytips.wxss";
+
+page {
+  position: relative;
+
+  .g-container {
+    width: 100%;
+    height: 100%;
+
+    //文本超出显示...
+    .g-hidden-text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    // 清除浮动
+    .g-clearfix::after {
+      content: "";
+      display: block;
+      clear: both;
+      visibility: hidden;
+    }
+
+    // 宽度670的下边框
+    .g-border-670:before {
+      content: "";
+      width: 1340rpx;
+      height: 200%;
+      position: absolute;
+      top: 0;
+      z-index: 0;
+      border-bottom: 1px solid #f1f1f1;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      box-sizing: border-box;
+    }
+
+    // 宽度100%的下边框
+    .g-border:before {
+      content: "";
+      width: 200%;
+      height: 200%;
+      position: absolute;
+      top: 0;
+      z-index: -1;
+      border-bottom: 1px solid #f1f1f1;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      box-sizing: border-box;
+    }
+  }
+
+  .agora-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(to bottom, #8fd3f5, #d3fdff);
+    color: #5083aa;
+  }
+
+  .h1 {
+    font-size: 32rpx;
+  }
+
+  .h2 {
+    font-size: 24rpx;
+  }
+
+  .flex-center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

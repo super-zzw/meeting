@@ -1,0 +1,279 @@
+// @Author: Chenyintang
+// @Date:   2019-06-07 22:19:45
+// @Email:  chenytrl@163.com
+// @Last modified by:   Chenyintang
+// @Last modified time: 2019-06-09 13:25:10
+@import "../../common/styles/variable.scss";
+page {
+  height: 100%;
+}
+.p-container {
+  height: 100%;
+  background-color: #f1f1f1;
+  box-sizing: border-box;
+
+  .p-body {
+    box-sizing: border-box;
+
+    .p-meeting-detail {
+      padding: 0 40rpx;
+      background-color: #fff;
+      box-sizing: border-box;
+
+      .p-title {
+        font-size: $size30;
+        font-family: SFProText-Medium;
+        font-weight: 500;
+        color: $color8;
+        line-height: 36rpx;
+        padding: 26rpx 0 28rpx;
+      }
+
+      .p-item-box {
+        margin-bottom: 16rpx;
+
+        .p-item {
+          position: relative;
+          z-index: 666;
+          height: 104rpx;
+          display: flex;
+          align-items: center;
+          font-size: $size34;
+          box-sizing: border-box;
+
+          .p-item-label {
+            width: 136rpx;
+            font-family: SFProText-Regular;
+            font-weight: 400;
+            color: $color8;
+            margin-right: 64rpx;
+          }
+
+          .p-item-text {
+            flex: 1;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: $color35;
+            z-index: 666;
+
+            &.p-item-room {
+              flex: 1;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+
+              .p-item-room-box {
+                flex: 1;
+                display: flex;
+                align-items: center;
+
+                .i-no {
+                  width: 52rpx;
+                  height: 28rpx;
+                  margin-right: 6rpx;
+                }
+
+                text {
+                  flex: 1;
+                }
+              }
+
+              .i-copy {
+                width: 48rpx;
+                height: 48rpx;
+              }
+            }
+
+            &.p-item-home {
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+
+              text {
+                flex: 1;
+              }
+
+              .i-copy {
+                width: 48rpx;
+                height: 48rpx;
+                margin-left: 44rpx;
+              }
+            }
+          }
+        }
+      }
+
+      &.p-meeting-people {
+        padding: 0;
+
+        .p-title {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          box-sizing: border-box;
+          padding-left: 40rpx;
+          position: relative;
+
+          &.p-title-btn {
+            border: none;
+            background-color: transparent;
+            margin-left: 0;
+            margin-right: 0;
+            text-align: left;
+            height: 104rpx;
+            border-radius: 0;
+          }
+
+          &.p-title-btn::after {
+            content: "";
+            width: 1340rpx;
+            height: 200%;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            border-bottom: 1px solid #f1f1f1;
+            transform: scale(0.5);
+            transform-origin: 80rpx 0;
+            box-sizing: border-box;
+            border-radius: 0;
+          }
+
+          text {
+            flex: 1;
+          }
+
+          .p-share-btn {
+            border: none;
+            margin-left: 0;
+            margin-right: 0;
+            padding-right: 40rpx;
+            box-sizing: border-box;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 0;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+            line-height: 1;
+            background-color: transparent;
+          }
+
+          button::after {
+            border: none;
+          }
+
+          .i-right {
+            width: 18rpx;
+            height: 28rpx;
+          }
+        }
+
+        button::after {
+          border: none;
+        }
+
+        .p-item-box {
+          padding: 0 40rpx;
+        }
+
+        .p-item-avatar {
+          width: 80rpx;
+          height: 80rpx;
+          margin-right: 24rpx;
+          border-radius: 100%;
+        }
+
+        .p-item-empty-avatar {
+          width: 80rpx;
+          height: 80rpx;
+          line-height: 80rpx;
+          margin-right: 24rpx;
+          border-radius: 100%;
+          background-color: #3183e9;
+          font-size: 20rpx;
+          text-align: center;
+          color: #fff;
+        }
+
+        .p-item-text {
+          position: relative;
+          z-index: 666;
+          height: 100%;
+          flex: 1;
+          display: flex;
+          align-items: center;
+
+          .i-edit {
+            width: 48rpx;
+            height: 48rpx;
+          }
+
+          .i-mic {
+            width: 28rpx;
+            height: 36rpx;
+            margin-right: 12rpx;
+          }
+
+          .p-join-meeting-name {
+            flex: 1;
+          }
+
+          .p-eidt-input {
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .p-tab-controls {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 9999999999;
+    width: 100%;
+
+    .p-tab-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .p-tab-controls-item {
+        flex: 1;
+        height: 96rpx;
+        line-height: 96rpx;
+        font-size: $size36;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        text-align: center;
+
+        &.p-tab-controls-item--cancel {
+          color: #000;
+          background-color: #fff;
+        }
+
+        &.p-tab-controls-item--start {
+          background-color: #0066e6;
+          color: #fff;
+
+          &.p-tab-controls-item--disabled {
+            opacity: 0.4;
+          }
+        }
+
+        &.p-tab-controls-item-iphonex {
+          padding-bottom: 70rpx;
+        }
+      }
+    }
+  }
+
+  .p-modal-title {
+    font-size: 36rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    margin-bottom: 52rpx;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "disableSwipeBack": true,
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "modal": "/components/modal/modal",
+    "agora-pusher": "/components/agora-pusher/agora-pusher",
+    "agora-player": "/components/agora-player/agora-player"
+  }
+}

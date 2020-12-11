@@ -1,0 +1,20 @@
+<view class="pusher-container" id="rtc-pusher"
+  style="top: {{y}}px; left: {{x}}px; width: {{width}}px; height: {{height}}px; position: absolute;">
+  <live-pusher wx:if="{{url!==''}}"
+    style="height:{{height}}px; position: absolute; width: 100%; z-index: {{painmode == 2 ? 11 : 8}};" url="{{url}}"
+    mode="RTC" aspect="{{aspect}}" class="camera" bindstatechange="recorderStateChange"
+    bindnetstatus="recorderNetChange" background-mute="true" muted="{{muted}}" beauty="{{beauty}}" autopush="true">
+    <slot></slot>
+    <cover-view class="i-box" wx:if="{{ismute}}" style="width: {{width}}px; height: {{height}}px;">
+      <cover-image class="i-close-mic" src="../../images/meeting/btn-mic-disabled@2x.png">
+      </cover-image>
+    </cover-view>
+    <cover-view class="box" wx:if="{{iscam}}"
+      style="width: {{width}}px; height: {{height}}px; z-index: {{painmode == 2 ? 12 : 9}};">
+      <cover-view class="p-close-cam">
+        <cover-image class="i-close-cam" src="../../images/meeting/btn-cam-disabled@2x.png"></cover-image>
+        <cover-view class="p-text">摄像头未开启</cover-view>
+      </cover-view>
+    </cover-view>
+  </live-pusher>
+</view>

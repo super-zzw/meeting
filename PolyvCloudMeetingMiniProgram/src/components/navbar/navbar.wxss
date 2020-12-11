@@ -1,0 +1,84 @@
+/**
+ * @Author: Chenyintang
+ * @Date:   2019-06-07 22:19:44
+ * @Email:  chenytrl@163.com
+ * @Last modified by:   Chenyintang
+ * @Last modified time: 2019-06-07 23:38:46
+ */
+
+.c-header {
+  display: flex;
+  align-items: center;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99999;
+}
+
+.c-header .c-line {
+  border-left: 1rpx solid #d7d7d7;
+  height: 36rpx;
+}
+
+.c-header .c-back {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 40rpx;
+}
+
+.c-header .c-back .c-btn-share {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-header .c-back .c-btn-share::after {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.c-header .c-back .c-btn-share image {
+  width: 52rpx;
+  height: 52rpx;
+}
+
+.c-header .c-back .c-icon-back {
+  width: 24rpx;
+  height: 44rpx;
+  margin-left: 24rpx;
+}
+
+.c-header .c-back .c-icon-home {
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: 40rpx;
+}
+
+.c-header .c-title-bar {
+  display: flex;
+  align-items: center;
+  width: 138rx;
+}
+
+.c-header .c-header-title {
+  position: absolute;
+  left: 50%;
+  font-size: 34rpx;
+  transform: translateX(-50%);
+  color: #000;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

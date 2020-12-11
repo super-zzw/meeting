@@ -1,0 +1,15 @@
+<view style="visibility: hidden;">
+  <block wx:for="{{media}}" wx:key="key">
+    <agora-pusher wx:if="{{item.type == 0 && !item.holding}}" id="rtc-pusher" x="{{item.left}}" y="{{item.top}}"
+      width="1" height="1" url="{{item.url}}" muted="{{muted}}" bindpushfailed="onPusherFailed"></agora-pusher>
+    <agora-player wx:if="{{item.type == 1 && !item.holding}}" id="rtc-player-{{item.uid}}" uid="{{item.uid}}"
+      x="{{item.left}}" y="{{item.top}}" width="1" height="1" url="{{item.url}}">
+    </agora-player>
+  </block>
+</view>
+<!-- <view style="display:none;">
+  <block wx:for="{{media}}" wx:key="key">
+    <agora-pusher wx:if="{{item.type == 0 && !item.holding}}" id="rtc-pusher" x="{{item.left}}" y="{{item.top}}" width="{{item.width}}" height="{{item.height}}" url="{{item.url}}" muted="{{muted}}" bindpushfailed="onPusherFailed"></agora-pusher>
+    <agora-player wx:if="{{item.type == 1 && !item.holding}}" id="rtc-player-{{item.uid}}" uid="{{item.uid}}" x="{{item.left}}" y="{{item.top}}" width="{{item.width}}" height="{{item.height}}" url="{{item.url}}"></agora-player>
+  </block>
+</view> -->

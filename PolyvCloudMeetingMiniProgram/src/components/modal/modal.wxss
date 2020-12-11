@@ -1,0 +1,82 @@
+.c-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 99999999999999;
+}
+
+.c-modal-content {
+  display: flex;
+  flex-direction: column;
+  width: 560rpx;
+  background-color: #fff;
+  width: 560rpx;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  padding-top: 50rpx;
+}
+
+.c-modal-btn-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.c-modal-btn-wrapper::after {
+  content: "";
+  width: 200%;
+  height: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-top: 1px solid #e5e5e5;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  box-sizing: border-box;
+}
+
+.c-cancel-btn,
+.c-confirm-btn {
+  position: relative;
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-family: SFProText-Regular;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+}
+
+.c-cancel-btn::after {
+  content: "";
+  width: 2rpx;
+  height: 200%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  border-right: 1px solid #e5e5e5;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  box-sizing: border-box;
+}
+
+.c-confirm-btn {
+  color: #0066e6;
+}
+
+.c-main-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: hidden;
+}

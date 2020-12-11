@@ -1,0 +1,105 @@
+@import "../../common/styles/variable.scss";
+
+page {
+  height: 100%;
+  background-color: #fff;
+  .p-container {
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    .p-body {
+      padding: 120rpx 40rpx 0 40rpx;
+      .p-input-row {
+        position: relative;
+        height: 96rpx;
+        margin-bottom: 32rpx;
+        display: flex;
+        align-items: center;
+
+        .p-input {
+          height: 100%;
+          flex: 1;
+          color: #353535;
+          background-color: #fff;
+        }
+
+        .p-input-psw {
+          height: 100%;
+          color: #353535;
+          background-color: #fff;
+          width: 80%;
+        }
+
+        .p-placeholder {
+          font-size: 34rpx;
+          font-family: PingFangSC-Regular;
+          font-weight: 400;
+          color: #b2b2b2;
+        }
+
+        .i-psw {
+          position: absolute;
+          right: 0;
+          width: 48rpx;
+          height: 48rpx;
+          z-index: 666;
+        }
+      }
+
+      .p-input-row:after {
+        content: "";
+        width: 1340rpx;
+        height: 2px;
+        position: absolute;
+        bottom: 0;
+        z-index: 0;
+        border-bottom: 1px solid #f1f1f1;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        box-sizing: border-box;
+      }
+
+      .p-input-row:last-child {
+        margin-bottom: 0;
+      }
+
+      // .p-input-row:before {
+      //   content: "";
+      //   width: 1340rpx;
+      //   height: 200%;
+      //   position: absolute;
+      //   top: 0;
+      //   z-index: 0;
+      //   border-bottom: 1px solid #f1f1f1;
+      //   transform: scale(0.5);
+      //   transform-origin: 0 0;
+      //   box-sizing: border-box;
+      // }
+
+      .p-btn {
+        width: 670rpx;
+        height: 96rpx;
+        line-height: 96rpx;
+        text-align: center;
+        margin-top: 64rpx;
+        background: rgba(0, 102, 230, 1);
+        border-radius: 10rpx;
+        opacity: 0.4;
+        border: 2rpx solid rgba(5, 5, 5, 0.08);
+        font-size: 36rpx;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+        border: none;
+
+        &.p-active {
+          opacity: 1;
+        }
+      }
+
+      .p-btn::after {
+        border: none;
+      }
+    }
+  }
+}

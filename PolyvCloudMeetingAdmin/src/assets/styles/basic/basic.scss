@@ -1,0 +1,154 @@
+@import './variables.scss';
+@import './mixins.scss';
+@import './common.scss';
+
+
+body {
+  margin: 0;
+  background-color: #fff;
+  line-height: 1;
+  font-size: 14px;
+  font-family: 'Microsoft YaHei', 'Pingfang SC', 'Lantinghei SC', 'Helvetica Neue', Helvetica, sans-serif;
+  color: #333;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: none;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+* {
+  box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, input, textarea, button {
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: inherit;
+}
+ul, ol {
+  list-style-type: none;
+}
+img {
+  border: none;
+  vertical-align: middle;
+}
+a,
+.g-link {
+  text-decoration: none;
+  color: #333;
+  @include insideLink;
+}
+a:hover,
+.g-link:hover {
+  color: $hoverColor;
+}
+input, textarea {
+  border-radius: 0;
+}
+input, textarea, select, button {
+  outline: none;
+}
+input[disabled] {
+  opacity: 1;
+}
+input[type=button],
+input[type=submit],
+input[type=reset] {
+  -webkit-appearance: none;
+  background: #fff;
+}
+button {
+  background: #fff;
+}
+
+
+/* 清浮动 */
+.g-clearfix:after {
+  display: block;
+  overflow: hidden;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  content: '.';
+}
+
+
+/* 单行内容，如有超出则以省略号结尾 */
+.g-singleline {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行内容，只兼容webkit（默认 2 行） */
+.g-multiline {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* 行内垂直居中 */
+.g-vmid {
+  vertical-align: middle;
+}
+
+
+/* 渐现 */
+@keyframes k-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.g-fade-in {
+  animation-name: k-fade-in;
+  animation-duration: 0.35s;
+}
+
+
+.g-title {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.g-progress {
+  .el-progress-bar {
+    width: 68%;
+    margin: 0;
+    padding: 0;
+  }
+  .el-progress__text {
+    position: absolute;
+  }
+}
+
+/*下拉框*/
+.g-hoverdown {
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    .g-hoverdown-menu {
+      display: block;
+    }
+  }
+}
+
+.g-hoverdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.g-caret {
+  @include caret;
+  &:hover {
+    background-image: url('assets/images/navbar/btn-more-hover.png');
+  }
+}
+
+.g-caret-w {
+  @include caret('assets/images/navbar/btn-more-w.png');
+}

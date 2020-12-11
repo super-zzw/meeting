@@ -1,0 +1,172 @@
+<wxs src="../../common/wxs/tools.wxs" module="tools" />
+<view class="g-container p-container">
+  <navbar showBackIcon="{{false}}"></navbar>
+  <view class="p-body">
+    <view class="p-tab">
+      <view class="p-tab-item" bindtap="skipPage" data-type="join-meeting" wx:if="{{sessionId}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true">
+          <image src="/images/index/btn-addm@2x.png"></image>
+        </button>
+        <text>加入会议</text>
+      </view>
+      <view class="p-tab-item" wx:else>
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true" hover-class="p-btn-img-hover"
+          data-type="join-meeting" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+          <image src="/images/index/btn-addm@2x.png"></image>
+        </button>
+        <text>加入会议</text>
+      </view>
+
+      <view class="p-tab-item" wx:if="{{!sessionId}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true" data-type="launch-meeting"
+          open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+          <image src="/images/index/btn-callm@2x.png"></image>
+        </button>
+        <text>发起会议</text>
+      </view>
+      <view class="p-tab-item" wx:if="{{sessionId && !isBindMobile}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true" data-type="launch-meeting"
+          open-type="getPhoneNumber" bindgetphonenumber="handleGetPhoneNumber">
+          <image src="/images/index/btn-callm@2x.png"></image>
+        </button>
+        <text>发起会议</text>
+      </view>
+      <view class="p-tab-item" data-type="launch-meeting" bindtap="skipPage" wx:if="{{sessionId && isBindMobile}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true">
+          <image src="/images/index/btn-callm@2x.png"></image>
+        </button>
+        <text>发起会议</text>
+      </view>
+
+      <view class="p-tab-item" wx:if="{{!sessionId}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true" data-type="subscribe-meeting"
+          open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+          <image src="/images/index/btn-bookm@2x.png"></image>
+        </button>
+        <text>预约会议</text>
+      </view>
+      <view class="p-tab-item" data-type="subscribe-meeting" bindtap="skipPage" wx:if="{{sessionId && isBindMobile}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true">
+          <image src="/images/index/btn-bookm@2x.png"></image>
+        </button>
+        <text>预约会议</text>
+      </view>
+      <view class="p-tab-item" wx:if="{{sessionId && !isBindMobile}}">
+        <button class="p-btn-img" hover-class="p-btn-img-hover" plain="true" data-type="subscribe-meeting"
+          open-type="getPhoneNumber" bindgetphonenumber="handleGetPhoneNumber">
+          <image src="/images/index/btn-bookm@2x.png"></image>
+        </button>
+        <text>预约会议</text>
+      </view>
+
+    </view>
+    <view class="p-list-box" wx:if="{{mySubscribeList.length}}">
+      <view class="p-list-title">我的预约</view>
+      <view class="p-list">
+        <view class="p-list-item g-border-670" wx:for="{{mySubscribeList}}" wx:key="index" bindtap="skipPage"
+          data-type="subscribe" data-roomno="{{item.channelId}}" data-id="{{item.meetingId}}"
+          data-status="{{item.status}}" data-ishost="{{item.isHost}}" data-confereeid="{{item.confereeId}}">
+          <view class="p-list-item-title">
+            <image class="i-mic" src="/images/index/ic-mic@2x.png" wx:if="{{item.isHost}}"></image>
+            <view class="p-list-title-text g-hidden-text">{{item.topic}}</view>
+            <view class="p-list-item-order">
+              <image class="i-no" src="/images/index/no@2x.png"></image>
+              <text>{{tools.formatRoomNo(item.roomNo)}}</text>
+            </view>
+          </view>
+          <view class="p-list-item-people g-hidden-text">{{item.conferee}}</view>
+          <view class="p-list-item-time clearfix {{ !item.isTimeOut ? '' : 'p-list-item-timeout'}}">
+            <text class="p-list-item-time-text">{{item.times}}\t{{item.beginDate}}</text>
+            <text
+              class="p-list-item-time-countdown p-list-item-time-subscribe-countdown {{item.timeStatus == null ? '' : 'p-list-item-time-countdown-weichaoshi'}}">{{item.timeStatus == null ? '已超时' : item.timeStatus}}</text>
+          </view>
+        </view>
+        <view class="p-look-more" bindtap="lookeMoreSubscribeMeeting" wx:if="{{total1 > 5 && isCanRequest1}}">
+          <text>查看更多</text>
+          <image class="i-more" src="/images/index/ic-more@2x.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="p-list-box">
+      <view class="p-list-title">
+        <text class="p-title">会议记录</text>
+        <picker class="p-select-time g-clearfix" mode="date" start="2019-01-01" end="{{endDate}}"
+          bindchange="bindDateChange" value="{{date}}">
+          <image class="i-calendar" src="/images/index/ic-calendar@2x.png" wx:if="{{isFiltered}}"></image>
+          <image class="i-calendar" src="/images/index/ic-calendar@2x.png"
+            wx:if="{{!isFiltered && meetingRecordsList.length}}"></image>
+          <view class="p-select-text" wx:if="{{isFiltered}}">筛选日期</view>
+          <view class="p-select-text" wx:if="{{!isFiltered && meetingRecordsList.length}}">筛选日期</view>
+        </picker>
+      </view>
+      <view class="p-list {{!meetingRecordsList.length ? 'p-list-bottom' : 'p-list-bottom'}}">
+        <view class="p-list-item {{item.isCancel ? 'p-list-cancel' : ''}} g-border-670" wx:for="{{meetingRecordsList}}"
+          wx:key="index" bindtap="skipPage" data-type="records" data-roomno="{{item.roomNo}}"
+          data-id="{{item.meetingId}}" data-status="{{item.isCancel}}">
+          <view class="p-list-item-title">
+            <image class="i-mic" src="/images/index/ic-mic@2x.png" wx:if="{{item.isHost && !item.isCancel}}">
+            </image>
+            <image class="i-mic" src="/images/index/ic-mic-gray@2x.png" wx:if="{{item.isHost && item.isCancel}}">
+            </image>
+            <view class="p-list-title-text g-hidden-text">{{item.topic}}</view>
+            <view class="p-list-item-order">
+              <image class="i-no" src="/images/index/no@2x.png" wx:if="{{!item.isCancel}}"></image>
+              <image class="i-no" src="/images/index/no-gray@2x.png" wx:else></image>
+              <view class="p-roomno {{item.isCancel ? 'p-roomno-cancel' : ''}} g-hiddent-text">{{item.roomNo}}<view
+                  class="g-hidden-text" wx:if="{{item.passWord}}">(密码{{item.passWord}})</view>
+              </view>
+            </view>
+          </view>
+          <view class="p-list-item-people g-hidden-text">{{item.conferee}}</view>
+          <view class="p-list-item-time clearfix">
+            <text class="p-list-item-time-text p-list-item-time-records-text">{{item.times}}\t{{item.beginDate}}</text>
+            <text class="p-list-item-time-countdown" wx:if="{{item.isCancel}}">已取消</text>
+          </view>
+        </view>
+        <view class="p-look-more {{isIphoneX ? 'p-look-more-bottom' : ''}}" bindtap="lookeMoreMeetingRecords"
+          wx:if="{{total2 > 10 && isCanRequest2}}">
+          <text>查看更多</text>
+          <image class="i-more" src="/images/index/ic-more@2x.png"></image>
+        </view>
+        <view class="p-empty-data" wx:if="{{!meetingRecordsList.length}}">
+          <image class="i-empty-data" src="/images/index/img-defaultpage@2x.png"></image>
+          <text>暂无会议记录</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <modal show="{{isShowModal}}" cancelText="{{ongoingMeetingDetail.isHost == 0 ? '离开会议' : '结束会议'}}"
+    confirmText="{{'继续会议'}}" bindcancel="bindCancel" bindconfirm='bindConfirm'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">您有会议还未结束，需要继续会议吗？</view>
+    </view>
+  </modal>
+  <modal show="{{isShowModal2}}" cancelBtn="{{false}}" confirmBtn="{{false}}">
+    <view class='p-modal-content'>
+      <view class="p-modal-title">云会议需要获取您的手机号码，才能进行下一步</view>
+      <view class="p-btn-box">
+        <button bindtap="bindCancel2">取消</button>
+        <button class="p-btn-phone" open-type="getPhoneNumber" bindgetphonenumber="handleGetPhoneNumber"
+          data-type="{{btnClickType}}">好的</button>
+      </view>
+    </view>
+  </modal>
+
+  <modal show="{{isShowModal3}}" cancelText="知道了" confirmText="联系客服" bindcancel="bindCancel3"
+    bindconfirm='bindConfirm3'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">试用结束，请联系客服购买使用</view>
+    </view>
+  </modal>
+  <modal show="{{isShowModal4}}" cancelText="取消" confirmText="呼叫" bindcancel="bindCancel4" bindconfirm='bindConfirm4'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">400-158-8816</view>
+    </view>
+  </modal>
+  <modal show="{{isShowModal5}}" cancelBtn="{{false}}" confirmText="知道了" bindconfirm='bindConfirm5'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">首次注册赠送20分钟体验时间</view>
+    </view>
+  </modal>
+</view>

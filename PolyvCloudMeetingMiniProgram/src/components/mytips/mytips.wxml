@@ -1,0 +1,8 @@
+<template name='mytips'>
+  <cover-view class="c-mytips {{ MyTips.show ? 'c-mytips-show' : '' }} {{MyTips.ipx ? 'c-mytips-ipx' :''}}"
+    style="{{MyTips.ipx ? 'top: 172rpx' : 'top: 128rpx'}}" wx:if="{{MyTips.show}}">
+    <cover-view class='c-mytips-box c-mytips-{{MyTips.icon}}'>
+      {{ MyTips.content }}
+    </cover-view>
+  </cover-view>
+</template>

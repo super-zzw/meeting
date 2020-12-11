@@ -1,0 +1,217 @@
+<wxs src="../../common/wxs/tools.wxs" module="tools" />
+<import src="../../components/mytips/mytips" />
+<view class="g-container p-container {{isShowMeetingRoom ? 'p-container-scroll' : ''}}">
+  <navbar title="{{meetingDetail.roomNo}}" showIcon="{{true}}" isShowShare="{{!isShowMeetingRoom}}" isClose="{{true}}"
+    isEditTitle="{{false}}" bindclosewin="handleClose">
+  </navbar>
+  <view class="p-body {{isShowMeetingRoom ? 'minimumSize' : ''}}">
+    <template is="mytips" data="{{ MyTips }}"></template>
+    <block wx:for="{{media}}" wx:key="key">
+      <agora-pusher wx:if="{{item.type == 0}}" id="rtc-pusher" x="{{item.left}}" y="{{item.top}}" uid="{{item.uid}}"
+        width="{{isShowMeetingRoom ? 1 : item.width}}" height="{{isShowMeetingRoom ? 1 : item.height}}"
+        url="{{item.url}}" muted="{{muted}}" ismute="{{item.ismute}}" iscam="{{item.iscam}}" painmode="{{item.mode}}"
+        bindpushfailed="onPusherFailed" bindtap="bindChangeWin" data-uid="{{item.uid}}" data-index="{{index}}"
+        bindlivePusherStatusChange="onPusherStatusChanged">
+        <!-- 底部操作栏 start -->
+        <cover-view wx:if="{{!isShowMeetingRoom && media.length == 1}}" class="p-bottom-tab"
+          style="bottom: 70rpx;z-index: 99999999999;">
+          <!-- <cover-image class="i-tab" src="/images/meeting/btn-board@2x.png"></cover-image> -->
+          <cover-view class="i-tab ppt-h5-draw-nav-btns__btn" bindtap="bindTapToPPT" wx:if="{{isHost == 1}}">
+            <cover-view class="ppt-h5-draw-nav-btns__btn-board">
+              <cover-view class="ppt-h5-draw-nav-btns__btn-board__background" style="{{changeViewModeStyle}}">
+                <cover-view class="ppt-h5-draw-nav-btns__btn-board__background__board">
+                  <cover-image src="/images/ppt/ic-board.png"></cover-image>
+                </cover-view>
+                <cover-view class="ppt-h5-draw-nav-btns__btn-board__background__camera">
+                  <cover-image src="/images/ppt/ic-camera.png"></cover-image>
+                </cover-view>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+          <cover-image class="i-tab"
+            src="{{!isCloseMic ? '/images/meeting/btn-mic@2x.png' : '/images/meeting/btn-mic-disabled-tab@2x.png'}}"
+            bindtap="handleChangeMic" data-uid="{{uid}}" data-ismute="{{!isCloseMic}}">
+          </cover-image>
+          <cover-image class="i-tab"
+            src="{{!isCloseCam ? '/images/meeting/btn-cam@2x.png' : '/images/meeting/btn-cam-disabled-tab@2x.png'}}"
+            bindtap="handleChangeCam" data-uid="{{uid}}" data-iscam="{{!isCloseCam}}"></cover-image>
+          <cover-image class="i-tab" src="/images/meeting/btn-chgcam@2x.png" bindtap="handleSwitchCamera"></cover-image>
+          <cover-image class="i-tab" src="/images/meeting/btn-chgcam@2x(1).png" bindtap="goMeetingRoomManage">
+          </cover-image>
+        </cover-view>
+        <!-- 底部操作栏 end -->
+      </agora-pusher>
+      <agora-player wx:if="{{item.type == 1}}" id="rtc-player-{{item.uid}}" uid="{{item.uid}}" ismute="{{item.ismute}}"
+        iscam="{{item.iscam}}" x="{{item.left}}" y="{{item.top}}" width="{{isShowMeetingRoom ? 1 : item.width}}"
+        height="{{isShowMeetingRoom ? 1 : item.height}}" url="{{item.url}}"
+        bindlivePlayerStatusChange="onPlayerStatusChanged">
+        <!-- 底部操作栏 start -->
+        <cover-view wx:if="{{!isShowMeetingRoom}}" class="p-bottom-tab" style="bottom: 70rpx;z-index: 99999999999;">
+          <!-- <cover-image class="i-tab" src="/images/meeting/btn-board@2x.png"></cover-image> -->
+          <cover-view class="i-tab ppt-h5-draw-nav-btns__btn" bindtap="bindTapToPPT" wx:if="{{isHost == 1}}">
+            <cover-view class="ppt-h5-draw-nav-btns__btn-board">
+              <cover-view class="ppt-h5-draw-nav-btns__btn-board__background" style="{{changeViewModeStyle}}">
+                <cover-view class="ppt-h5-draw-nav-btns__btn-board__background__board">
+                  <cover-image src="/images/ppt/ic-board.png"></cover-image>
+                </cover-view>
+                <cover-view class="ppt-h5-draw-nav-btns__btn-board__background__camera">
+                  <cover-image src="/images/ppt/ic-camera.png"></cover-image>
+                </cover-view>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+          <cover-image class="i-tab"
+            src="{{!isCloseMic ? '/images/meeting/btn-mic@2x.png' : '/images/meeting/btn-mic-disabled-tab@2x.png'}}"
+            bindtap="handleChangeMic" data-uid="{{uid}}" data-ismute="{{!isCloseMic}}">
+          </cover-image>
+          <cover-image class="i-tab"
+            src="{{!isCloseCam ? '/images/meeting/btn-cam@2x.png' : '/images/meeting/btn-cam-disabled-tab@2x.png'}}"
+            bindtap="handleChangeCam"></cover-image>
+          <cover-image class="i-tab" src="/images/meeting/btn-chgcam@2x.png" bindtap="handleSwitchCamera"></cover-image>
+          <cover-image class="i-tab" src="/images/meeting/btn-chgcam@2x(1).png" bindtap="goMeetingRoomManage">
+          </cover-image>
+        </cover-view>
+        <!-- 底部操作栏 end -->
+      </agora-player>
+    </block>
+
+    <!-- 网络信号不佳 -->
+    <cover-view class="p-close-cam" wx:if="{{isNetError}}">
+      <cover-image class="i-close-cam" src="/images/meeting/btn-network@2x.png"></cover-image>
+      <cover-view class="p-text">网络信号不佳</cover-view>
+    </cover-view>
+
+  </view>
+
+  <!-- 会议室管理 -->
+  <view class="p-body-room" hidden="{{!isShowMeetingRoom}}" style="height: 100%;">
+    <view class="p-meeting-detail">
+      <view class="p-item-box">
+        <view class="p-item">
+          <view class="p-item-label">会议主题</view>
+          <view class="p-item-text p-item-home g-hidden-text">
+
+            <text class="g-hidden-text" wx-if="{{!isEditTheme}}">{{meetingDetail.topic}}</text>
+            <input class="p-theme-input g-hidden-text" auto-focus="true" maxlength="20" value="{{meetingDetail.topic}}"
+              bindinput="handleTopicInputing" bindblur="handleTopicInput" wx:else />
+
+            <image class="i-edit" src="/images/subscribe-meeting/btn-edit@2x.png" bindtap="editTheme"
+              data-text="{{meetingDetail.topic}}" wx:if="{{meetingDetail.isHost}}"></image>
+
+            <image class="i-lock"
+              src="{{meetingDetail.locking ? '/images/subscribe-meeting/btn-locked@2x.png' : '/images/subscribe-meeting/btn-no-lock@2x.png'}}"
+              bindtap="lockMeetingRoom" wx:if="{{meetingDetail.isHost}}"></image>
+
+          </view>
+        </view>
+        <view class="p-item">
+          <view class="p-item-label">房间号</view>
+          <view class="p-item-text p-item-room" bindtap="copyText" data-text="{{meetingDetail.roomNo}}"
+            data-psw="{{meetingDetail.passWord}}">
+            <view class="p-item-room-box">
+              <image class="i-no" src="/images/subscribe-meeting/no@2x.png"></image>
+              <text>{{tools.formatRoomNo(meetingDetail.roomNo)}}<text
+                  wx:if="{{meetingDetail.passWord}}">(密码:{{meetingDetail.passWord}})</text></text>
+            </view>
+            <image class="i-copy" src="/images/subscribe-meeting/btn-copy@2x.png"></image>
+          </view>
+        </view>
+        <view class="p-item g-hidden-text">
+          <view class="p-item-label">房间地址</view>
+          <view class="p-item-text p-item-home g-hidden-text" bindtap="copyText" data-text="{{meetingDetail.roomAddr}}">
+            <text class="g-hidden-text">{{meetingDetail.roomAddr}}</text>
+            <image class="i-copy" src="/images/subscribe-meeting/btn-copy@2x.png"></image>
+          </view>
+        </view>
+        <view class="p-item">
+          <view class="p-item-label">主持人</view>
+          <view class="p-item-text g-hidden-text">{{meetingDetail.nickName}}</view>
+        </view>
+        <view class="p-item">
+          <view class="p-item-label">参会人数</view>
+          <view class="p-item-text">{{meetingDetail.counts}}人</view>
+        </view>
+        <view class="p-item">
+          <view class="p-item-label">开始时间</view>
+          <view class="p-item-text">{{meetingDetail.beginDate}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="p-line"></view>
+    <view class="p-meeting-people p-meeting-detail">
+      <view class="p-title">
+        <text>邀请参会成员</text>
+        <button type="button" open-type="share" class="p-share-btn">
+          <image class="i-right" src="/images/subscribe-meeting/btn-more@2x.png"></image>
+        </button>
+      </view>
+      <view class="touch-item {{(item.isTouchMove && index != 0) && meetingDetail.isHost ? 'touch-move-active' : ''}}"
+        data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{joinMeetingPeopleList}}"
+        wx:key="index">
+        <view class="p-content p-item-box" style="width: 100%;">
+          <view class="p-item" style="width: 670rpx;">
+            <image class="p-item-avatar" src="{{item.avatarUrl}}" wx:if="{{item.avatarUrl}}"></image>
+            <view class="p-item-empty-avatar g-hidden-text" wx:else>{{item.nickName}}</view>
+            <view class="p-item-text g-hidden-text g-border">
+              <image class="i-mic" src="/images/index/ic-mic@2x.png" wx:if="{{item.isHost}}"></image>
+
+              <text class="p-join-meeting-name g-hidden-text"
+                wx:if="{{!isEditMode && item.isUpdate}}">{{item.nickName}}<text
+                  wx:if="{{item.isHost}}">（主持人）</text></text>
+              <input type="text" class="p-eidt-input" auto-focus="false" maxlength="16" value="{{item.nickName}}"
+                bindblur="handleNickInput" bindinput="handleNickInputing" wx:if="{{isEditMode && item.isUpdate}}" />
+
+              <text class="p-join-meeting-name g-hidden-text" wx:if="{{!item.isUpdate}}">{{item.nickName}}</text>
+
+              <image class="i-edit" src="/images/subscribe-meeting/btn-edit@2x.png" bindtap="editNickName"
+                data-id="{{item.confereeId}}" data-index="{{index}}" wx:if="{{item.isUpdate}}"
+                style="position: absolute;right: 0;">
+              </image>
+            </view>
+          </view>
+        </view>
+        <view class="p-del p-jinyin {{item.micMute ? ' p-cancel-jinyin' : ''}}" catchtap="handleVoice"
+          data-index="{{index}}" data-uid="{{item.confereeId}}" data-ismute="{{item.micMute}}">
+          {{item.micMute ? '取消静音' : '静音'}}</view>
+        <view class="p-del" catchtap="handleDel" data-index="{{index}}" data-uid="{{item.confereeId}}">移出</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="p-tab-controls" hidden="{{!isShowMeetingRoom}}">
+    <view class="p-tab-box">
+      <view class="p-tab-controls-item p-tab-controls-item--start {{isIphoneX ? 'p-tab-controls-item--bottom' : ''}}"
+        bindtap="endingMeeting">
+        {{meetingDetail.isHost ? '结束会议' : '退出会议'}}</view>
+    </view>
+  </view>
+
+  <!-- 结束会议弹框 -->
+  <modal show="{{isShowModal}}" cancelText="{{meetingDetail.isHost ? '确认结束' : '确定退出'}}"
+    confirmText="{{meetingDetail.isHost ? '暂不结束' : '暂不退出'}}" bindcancel="bindConfirm" bindconfirm='bindCancel'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">确定{{meetingDetail.isHost ? '结束' : '退出'}}会议吗？</view>
+    </view>
+  </modal>
+
+  <!-- 会议已结束弹框 -->
+  <modal show="{{isShowModal2}}" cancelBtn="{{false}}" confirmText="{{'离开会议室'}}" bindconfirm='bindConfirm2'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title2">会议已结束</view>
+      <view class="p-content-box">
+        <view class="p-content-box-row">
+          <text class="p-label">会议时间</text>
+          <text class="p-text">{{leaveMeetingDetail.meetingTimes}}</text>
+        </view>
+        <view class="p-content-box-row">
+          <text class="p-label">历时</text>
+          <text class="p-text">{{leaveMeetingDetail.duration}}''</text>
+        </view>
+        <view class="p-content-box-row">
+          <text class="p-label">人数</text>
+          <text class="p-text">{{leaveMeetingDetail.counts}}人</text>
+        </view>
+      </view>
+    </view>
+  </modal>
+</view>

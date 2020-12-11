@@ -1,0 +1,311 @@
+@mixin mid_y{
+  position: relative;
+  top:50%;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+
+@mixin mid_x{
+  position: relative;
+  left:50%;
+  -webkit-transform: translate(-50%, 0);
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+@mixin mid{
+  position: relative;
+  top:50%;
+  left:50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+@mixin addAnimation($moveTime) {
+  transition: all $moveTime;
+  -moz-transition: all $moveTime; /* Firefox 4 */
+  -webkit-transition: all $moveTime; /* Safari 和 Chrome */
+  -o-transition: all $moveTime; /* Opera */
+}
+
+.ppt-h5-for-meeting{
+  height:100vh;
+  background-color: #393842;
+  .ppt-h5-draw-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#353535;
+    .ppt-h5-draw-nav-btns{
+      display:flex;
+      margin-top:26rpx;
+      height: 166rpx;
+      &__btn{
+        flex:1;
+        .ppt-board-nav-image{
+          width: 96rpx;
+          height: 96rpx;
+          @include mid_x;
+          &:active:after{
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,.1);
+            border-radius: 50%;
+          }
+        }
+        &-board{
+          width: 96rpx;
+          height: 96rpx;
+          border-radius: 16rpx;
+          overflow: hidden;
+          @include mid_x;
+          &__background{
+            width: 100%;
+            position: relative;
+            top: -72rpx;
+            @include addAnimation(.3s);
+            .ppt-board-nav-image{
+              @include mid;
+              position: absolute;
+            }
+            &__board{
+              background: #fff;
+              height: 84rpx;
+              position: relative;
+              .ppt-board-nav-image{
+                width: 56rpx;
+                height: 56rpx;
+              }
+            }
+            &__camera{
+              background: #0066E6;
+              height: 84rpx;
+              position: relative;
+              .ppt-board-nav-image{
+                width: 62rpx;
+                height: 48rpx;
+              }
+            }
+          }
+        }
+      }
+    }
+    .ppt-h5-draw-nav-color{
+      display: flex;
+      height: 96rpx;
+      border-bottom: solid 1px #000;
+      overflow: hidden;
+      @include addAnimation(.3s);
+      &__btn{
+        flex: 1;
+        height: 100%;
+        &__color{
+          width: 48rpx;
+          height:48rpx;
+          border-radius: 50%;
+          @include mid;
+          @include addAnimation(.3s);
+        }
+      }
+      &__btn-active{
+        .ppt-h5-draw-nav-color__btn__color{
+          width: 40rpx;
+          height: 40rpx;
+          border: solid 8rpx #fff;
+        }
+      }
+    }
+  }
+  // ppt横屏
+  .ppt-h5-draw-nav-horizontal{
+    left: auto;
+    right: 0;
+    height: 100%;
+    width: 144rpx;
+    @include addAnimation(.3s);
+    .ppt-h5-draw-nav-btns{
+      position: fixed;
+      right: 0;
+      flex-direction: column;
+      margin-top:auto;
+      padding-left:13rpx;
+      height: auto;
+      width: 96rpx;
+      &__btn{
+        .ppt-board-nav-image{
+          width: 48rpx;
+          height: 48rpx;
+          left:auto;
+          @include mid_y;
+          margin-left: 13rpx;
+        }
+        &-board{
+          width: 48rpx;
+          height: 48rpx;
+          border-radius: 8rpx;
+          @include mid_y;
+          left: 0;
+          margin-left: 13rpx;
+          &__background{
+            top: -32rpx;
+            &__board{
+              height: 42rpx;
+              .ppt-board-nav-image{
+                width: 28rpx;
+                height: 28rpx;
+                margin-left: 0;
+                @include mid;
+              }
+            }
+            &__camera{
+              height: 42rpx;
+              .ppt-board-nav-image{
+                width: 31rpx;
+                height: 24rpx;
+              }
+            }
+          }
+        }
+      }
+    }
+    .ppt-h5-draw-nav-color{
+      position: fixed;
+      right: 96rpx;
+      flex-direction: column;
+      height: 100%;
+      width: 48rpx;
+      border-bottom: none;
+      border-right: solid 1px #000;
+      &__btn{
+        height: auto;
+        width: 100%;
+        &__color{
+          width: 24rpx;
+          height:24rpx;
+        }
+      }
+      &__btn-active{
+        .ppt-h5-draw-nav-color__btn__color{
+          width: 20rpx;
+          height: 20rpx;
+          border: solid 4rpx #fff;
+        }
+      }
+    }
+    &.ppt-h5-for-audience-horizontal{
+      .ppt-h5-draw-nav-btns__btn{
+        position: absolute;
+        margin: 0 !important;
+        float: none !important;
+        width: 42rpx;
+        height: 42rpx;
+        .ppt-board-nav-image{
+          @include mid;
+          position: absolute;
+        }
+      }
+      .ppt-h5-draw-nav-btns__btn-left{
+        top: 20rpx;
+      }
+      .ppt-h5-draw-nav-btns__btn-right{
+        bottom: 20rpx;
+      }
+    }
+  }
+  // 会议成员进入白板时的样式
+  .ppt-h5-for-audience{
+    background: none;
+    .ppt-h5-draw-nav-btns{
+      display: block;
+    }
+    .ppt-h5-draw-nav-btns__btn{
+      margin: 0 46rpx;
+    }
+    .ppt-h5-draw-nav-btns__btn-left{
+      float: left;
+    }
+    .ppt-h5-draw-nav-btns__btn-right{
+      float: right;
+    }
+    $micTipSize: 30rpx;
+    $micTipFont: 11rpx;
+    .mic-connect-status{
+      position: fixed;
+      top: 0;
+      right: 40rpx;
+      width: 100%;
+      &__list{
+        float: right;
+        margin-left: 20rpx;
+        &__user{
+          @include mid_x;
+          width: $micTipSize * 2;
+          height: $micTipSize * 2;
+          border-radius: 50%;
+          text-align: center;
+          background-color: #3183E9;
+          color: #fff;
+          font-size: $micTipFont * 2;
+          line-height: $micTipSize * 2;
+          position: relative;
+          &__close{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: $micTipSize * 2;
+            height: $micTipSize * 2;
+          }
+          &__talk{
+            height: 80rpx;
+            width: 80rpx;
+            @include mid;
+            position: absolute;
+            z-index: -1;
+          }
+        }
+      }
+    }
+    .mic-connect-status-horizontal{
+      left: 0;
+      top: 20rpx;
+      .mic-connect-status__list{
+        margin-bottom: 10rpx;
+        margin-left: 10rpx;
+        width: 50rpx;
+        float: none;
+      }
+      .mic-connect-status__list__user{
+        margin-bottom: none;
+        margin-right: 16px;
+        width: $micTipSize;
+        height: $micTipSize;
+        font-size: $micTipFont;
+        line-height: $micTipSize;
+      }
+      .mic-connect-status__list__user__close{
+        width: $micTipSize;
+        height: $micTipSize;
+      }
+      .mic-connect-status__list__user__talk{
+        height: 40rpx;
+        width: 40rpx;
+      }
+    }
+  }
+}
+.ppt-h5-for-meeting-white{
+  background-color: #F6F6F6;
+}

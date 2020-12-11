@@ -1,0 +1,41 @@
+<wxs src="../../common/wxs/tools.wxs" module="tools" />
+<import src="../../components/mytips/mytips" />
+<view class="g-container p-container">
+  <navbar title="保利威云会议" showIcon="{{true}}"></navbar>
+  <view class="p-body">
+    <template is="mytips" data="{{ MyTips }}"></template>
+    <view class="p-input-row">
+      <image class="i-no" src="/images/join-meeting/no-large@2x.png"></image>
+      <text class="p-room-num">{{tools.formatRoomNo(roomno)}}</text>
+    </view>
+    <view class="p-input-row">
+      <input class="p-input" type="text" maxlength="20" placeholder="输入会议主题(默认会议)" placeholder-class="p-placeholder"
+        bindinput="handleMeetingName" value="{{meetingName}}" />
+      <text class="p-numbers">{{len}}/20</text>
+    </view>
+    <view class="p-input-row">
+      <input class="p-input-psw" type="number" maxlength="6" placeholder="设置六位数密码(可为空)"
+        placeholder-class="p-placeholder" wx:if="{{isOpenPsw}}" value="{{psw}}" bindinput="handlePsw" />
+      <input class="p-input-psw" password type="number" maxlength="6" placeholder="设置六位数密码(可为空)"
+        placeholder-class="p-placeholder" wx:else value="{{psw}}" bindinput="handlePsw" />
+      <image class="i-psw"
+        src="{{!isOpenPsw ? '/images/join-meeting/btn-eye-closed@2x.png' : '/images/join-meeting/btn-eye-open@2x.png'}}"
+        bindtap="openOrclose"></image>
+    </view>
+    <form bindsubmit="formSubmit" report-submit="true">
+      <button class="p-btn p-active" form-type="submit" bindtap="launchMeeting">发起会议</button>
+    </form>
+  </view>
+
+  <modal show="{{isShowModal}}" cancelText="知道了" confirmText="联系客服" bindcancel="bindCancel" bindconfirm='bindConfirm'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">试用结束，请联系客服购买使用</view>
+    </view>
+  </modal>
+  <modal show="{{isShowModal2}}" cancelText="取消" confirmText="呼叫" bindcancel="bindCancel2" bindconfirm='bindConfirm2'>
+    <view class='p-modal-content'>
+      <view class="p-modal-title">400 12345652</view>
+    </view>
+  </modal>
+
+</view>

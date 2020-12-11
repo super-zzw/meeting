@@ -1,0 +1,8 @@
+*.js eol=lf
+*.wxml eol=lf
+*.wxss eol=lf
+*.scss eol=lf
+*.json eol=lf
+*.log eol=lf
+*.txt eol=lf
+*.md eol=lf

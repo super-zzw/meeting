@@ -1,0 +1,18 @@
+<view class="play-container" style="left:{{x}}px; top:{{y}}px; width: {{width}}px; height: {{height}}px; ">
+  <live-player wx:if="{{url!==''}}" id="player-{{uid}}" src="{{url}}" mode="RTC" class="player"
+    bindstatechange="playerStateChange" object-fit="fillCrop" auto-pause-if-open-native="false"
+    auto-pause-if-navigate="false" orientation="vertical"
+    style="height:{{height}}px; position: absolute; width: 100%; top: 0; left: 0; z-index: 10;" />
+  <slot></slot>
+  <cover-view class="i-box" wx:if="{{ismute}}" style="width: {{width}}px; height: {{height}}px;">
+    <cover-view style="position: relative; width: 100%; height: 100%;">
+      <cover-image class="i-close-mic" src="../../images/meeting/btn-mic-disabled@2x.png"></cover-image>
+    </cover-view>
+  </cover-view>
+  <cover-view class="box" wx:if="{{iscam}}" style="width: {{width}}px; height: {{height}}px;">
+    <cover-view class="p-close-cam">
+      <cover-image class="i-close-cam" src="../../images/meeting/btn-cam-disabled@2x.png"></cover-image>
+      <cover-view class="p-text">摄像头未开启</cover-view>
+    </cover-view>
+  </cover-view>
+</view>

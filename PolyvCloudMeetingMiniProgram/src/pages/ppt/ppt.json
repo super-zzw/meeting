@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "ppt": "/components/ppt/ppt",
+    "agora-meeting": "/components/agora-meeting/agora-meeting"
+  },
+  "pageOrientation": "auto",
+  "resizable": true
+}

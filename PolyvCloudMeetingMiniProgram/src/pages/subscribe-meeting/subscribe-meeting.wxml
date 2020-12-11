@@ -1,0 +1,30 @@
+<import src="../../components/mytips/mytips" />
+<view class="g-container p-container">
+  <navbar title="预约会议" showIcon="{{true}}"></navbar>
+  <view class="p-body">
+    <template is="mytips" data="{{ MyTips }}"></template>
+    <view class="p-input-row">
+      <input class="p-input" type="text" placeholder="输入会议主题(默认会议)" placeholder-class="p-placeholder"
+        bindinput="handleMeetingName" value="{{meetingName}}" />
+      <text class="p-numbers">{{len}}/20</text>
+    </view>
+    <picker class="p-input-row" mode="multiSelector" bindchange="bindMultiPickerChange"
+      bindcolumnchange="bindMultiPickerColumnChange" bindcancel="bindMultiPickerCancel" value="{{multiIndex}}"
+      range="{{multiArray}}">
+      <input class="p-input" type="text" placeholder="预约时间" disabled="true" placeholder-class="p-placeholder"
+        value="{{subscribeTime}}" />
+    </picker>
+
+    <picker class="p-input-row" mode="multiSelector" bindchange="bindMultiPickerChange2"
+      bindcolumnchange="bindMultiPickerColumnChange2" value="{{multiIndex2}}" range="{{multiArray2}}">
+      <input class="p-input" type="text" placeholder="预估时长" disabled="true" placeholder-class="p-placeholder"
+        value="{{subscribeHours}}" />
+    </picker>
+
+    <form bindsubmit="formSubmit" report-submit="true">
+      <button class="p-btn {{(subscribeTime && subscribeHours) ? 'p-active' : ''}}" form-type="submit"
+        bindtap="subscribeMeeting">预约会议</button>
+    </form>
+
+  </view>
+</view>

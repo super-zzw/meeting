@@ -1,0 +1,103 @@
+<import src="../../components/mytips/mytips" />
+<view class="ppt-h5-for-meeting {{isWhiteBoard && !inHorizontal ?'ppt-h5-for-meeting-white':''}}">
+  <navbar title="{{options.roomNo}}" showIcon="{{true}}" isClose="{{true}}" isShowShare="{{true}}"
+    isEditTitle="{{false}}" wx:if="{{!inHorizontal}}" bind:soundChange="bindSoundChange"></navbar>
+  <template is="mytips" data="{{ MyTips }}"></template>
+  <agora-meeting uid="{{options.uid}}" roomno="{{options.channelId}}" id="agoraMeeting"
+    bind:changeMic="handleChangeMic"></agora-meeting>
+  <view class="ppt-h5-paint" style="height:{{pptH}};{{pptH5Top}}">
+    <ppt id="componentPPT" chatData="{{detail}}" pptSize='{{pptSize}}' pptDelayTime='{{pptDelayTime}}'
+      bindsocketevent="handleSocketEvent" whiteProp="{{2/3}}" bind:toggleWhiteBoard="toggleWhiteBoard" user="{{user}}"
+      currentPaintColor="{{colors[currentColor]}}" toDeletePaint="{{inDelete}}"
+      canEditPaint="{{(drawMode === 'pan' || drawMode === 'delete') && (options && options.pageType === 'create')}}"
+      canControlPPT="{{options && options.pageType === 'create'}}" paintBackColor="{{paintBackColor}}"
+      pptBackColorFromProp="{{pptBackColorFromProp}}"></ppt>
+  </view>
+  <!-- 会议发起者界面 -->
+  <view class="ppt-h5-draw-nav {{inHorizontal?'ppt-h5-draw-nav-horizontal':''}}" style="{{navWidthInHorizontal}}"
+    wx:if="{{options.pageType === 'create'}}">
+    <view class="ppt-h5-draw-nav-color" style="{{colorStyle}}{{pptColorHorizontalH}}">
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'red' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="red">
+        <view style="background:{{colors.red}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'purple' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="purple">
+        <view style="background:{{colors.purple}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'blue' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="blue">
+        <view style="background:{{colors.blue}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'green' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="green">
+        <view style="background:{{colors.green}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'yellow' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="yellow">
+        <view style="background:{{colors.yellow}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'black' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="black">
+        <view style="background:{{colors.black}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+      <view class="ppt-h5-draw-nav-color__btn {{currentColor === 'white' ? 'ppt-h5-draw-nav-color__btn-active' : ''}}"
+        bind:tap="bindTapColor" data-type="white">
+        <view style="background:{{colors.white}}" class="ppt-h5-draw-nav-color__btn__color"></view>
+      </view>
+    </view>
+    <view class="ppt-h5-draw-nav-btns" style="{{pptNavHorizontalH}}">
+      <!-- <view class="ppt-h5-draw-nav-btns__btn" bind:tap="bindTapToCam"><image src="/images/ppt/btn-to-cam.png"></image></view> -->
+      <view class="ppt-h5-draw-nav-btns__btn" bind:tap="bindTapToCam">
+        <view class="ppt-h5-draw-nav-btns__btn-board">
+          <view class="ppt-h5-draw-nav-btns__btn-board__background" style="{{changeViewModeStyle}}">
+            <view class="ppt-h5-draw-nav-btns__btn-board__background__board">
+              <image src="/images/ppt/ic-board.png" class="ppt-board-nav-image"></image>
+            </view>
+            <view class="ppt-h5-draw-nav-btns__btn-board__background__camera">
+              <image src="/images/ppt/ic-camera.png" class="ppt-board-nav-image"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="ppt-h5-draw-nav-btns__btn" bind:tap="bindTapToChnageDrawMode" data-type="pan">
+        <image src="/images/ppt/btn-pan{{drawMode==='pan'?'-active':''}}.png" class="ppt-board-nav-image"></image>
+      </view>
+      <view class="ppt-h5-draw-nav-btns__btn" bind:tap="bindTapToChnageDrawMode" data-type="delete">
+        <image src="/images/ppt/btn-delete{{drawMode==='delete'?'-active':''}}.png" class="ppt-board-nav-image"></image>
+      </view>
+      <view class="ppt-h5-draw-nav-btns__btn" bind:tap="bindTapToChnageDrawMode" data-type="deleteAll">
+        <image src="/images/ppt/btn-delete-all.png" class="ppt-board-nav-image"></image>
+      </view>
+      <view class="ppt-h5-draw-nav-btns__btn" bind:tap="bindSelectDoc">
+        <image src="/images/ppt/{{!isWhiteBoard?'btn-to-white-board':'btn-doc'}}.png" class="ppt-board-nav-image">
+        </image>
+      </view>
+    </view>
+  </view>
+  <!-- 会议听众界面 -->
+  <view
+    class="ppt-h5-draw-nav ppt-h5-for-audience {{inHorizontal?'ppt-h5-draw-nav-horizontal ppt-h5-for-audience-horizontal':''}}"
+    style="{{navWidthInHorizontal}}" wx:else>
+    <view class="ppt-h5-draw-nav-btns" style="{{pptColorHorizontalH}}">
+      <view class="ppt-h5-draw-nav-btns__btn ppt-h5-draw-nav-btns__btn-left" bind:tap="bindTapControlMic">
+        <image src="/images/meeting/btn-mic{{isCloseMic ? '-disabled' : ''}}@2x.png" class="ppt-board-nav-image">
+        </image>
+      </view>
+      <view class="ppt-h5-draw-nav-btns__btn ppt-h5-draw-nav-btns__btn-right" bind:tap="baindTapManage">
+        <image src="/images/meeting/btn-chgcam@2x(1).png" class="ppt-board-nav-image"></image>
+      </view>
+    </view>
+    <view class="mic-connect-status {{inHorizontal ? 'mic-connect-status-horizontal' : ''}}" style="{{micListStyle}}">
+      <view class="mic-connect-status__list" wx:for="{{users}}" wx:key="{{index}}">
+        <view class="mic-connect-status__list__user">
+          <view>{{item.miniName}}</view>
+          <image wx:if="{{item.micMute}}" src="/images/ppt/btn-mic-close.png"
+            class="mic-connect-status__list__user__close"></image>
+          <image wx:if="{{item.micStatus && item.inSpeak}}" src="/images/ppt/tip-mic-in-talk.gif"
+            class="mic-connect-status__list__user__talk"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

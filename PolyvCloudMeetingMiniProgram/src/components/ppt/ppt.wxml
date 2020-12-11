@@ -1,0 +1,33 @@
+<view class="plv-ppt plv-mp-skin__{{ skin }}"
+      bindtap='handleClickPPT'
+      catch:touchstart='handleTouchEvent'
+      catch:touchmove='handleTouchEvent'
+      catch:touchend='handleTouchEvent'
+      style="width:{{width}}px;height:{{height}}px;{{pptBackColorFromProp || pptBackColor}}"
+      id="pptH5Paint">
+  <view id="plvPPTDom" class="plv-ppt-dom" style="width:{{pptDomStyle.width}};height:{{pptDomStyle.height}};top:{{pptDomStyle.top}}px;left:{{pptDomStyle.left}}px;position:relative;">
+    <image src="{{imgUrl}}" class="plv-ppt-dom-img" mode="aspectFit" bindload='handleImgLoad' style="{{pptStyle}}"></image>
+    <view id="plvPPTDomLoad" class="plv-ppt-dom-load" style="display:{{isLoading?'block':'none'}}">
+      <view class="line-spin-fade-loader">
+        <view></view><view></view><view></view><view></view><view></view><view></view><view></view><view></view>
+      </view>
+    </view>
+    
+    <image wx:if="{{paintImgUrl}}" src="{{paintImgUrl}}" style="{{canvasStyle}}display:{{paintImgUrl && showPaintImg?'block':'none'}};{{isBoard?'background-color:#F6F6F6;':''}}"></image>
+    <canvas class="plv-ppt-dom-paint" canvas-id="paintbrush" style="{{canvasStyle}}{{isBoard?('background:'+paintBackColor+';'):''}}display:{{paintImgUrl && showPaintImg?'none':'block'}}" id="paintbrush"></canvas>
+    <canvas wx:if="{{canEditPaint}}" class="plv-ppt-dom-paint" canvas-id="paintbrushForDraw" style="{{canvasStyle}}display:{{paintImgUrl && showPaintImg?'none':'block'}}" id="paintbrushForDraw"></canvas>
+    
+
+    <view class="plv-ppt-dom-btns" hidden="{{!isShowPageBtn}}">
+      <view class="plv-ppt-dom-btns-btn plv-ppt-dom-btns-prev" hidden="{{!isShowPreBtn}}" bindtap='handleTapPreBtn'>
+        <view class="plv-ppt-dom-btns-btn-icon plv-ppt-dom-btns-prev-icon"></view>
+      </view>
+      <view class="plv-ppt-dom-btns-btn plv-ppt-dom-btns-next" hidden="{{!isShowNextBtn}}" bindtap='handleTapNextBtn'>
+        <view class="plv-ppt-dom-btns-btn-icon plv-ppt-dom-btns-next-icon"></view>
+      </view>
+      <view class="plv-ppt-dom-btns-back" bindtap='toCurrentTeacherOp'>回到当前页</view>
+    </view>
+    <!-- <view style="position:absolute;top:0;color:red;">{{vidTime}}</view> -->
+    <!-- <view style="position:absolute;top:20px;color:red;">{{log}}</view> -->
+  </view>
+</view>

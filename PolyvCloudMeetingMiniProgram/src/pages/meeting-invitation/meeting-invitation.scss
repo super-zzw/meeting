@@ -1,0 +1,136 @@
+@import "../../common/styles/variable.scss";
+
+page {
+  height: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  .p-container {
+    height: 100%;
+    .p-body {
+      box-sizing: border-box;
+      height: 100%;
+      padding-top: 150rpx;
+      overflow: hidden;
+
+      .p-invite-name {
+        height: 42rpx;
+        font-size: 30rpx;
+        font-family: SFProText-Regular;
+        font-weight: 400;
+        color: rgba(136, 136, 136, 1);
+        line-height: 36rpx;
+        margin-bottom: 58rpx;
+        text-align: center;
+      }
+
+      .p-invite-theme {
+        height: 74rpx;
+        font-size: 52rpx;
+        font-family: SFProText-Regular;
+        font-weight: 400;
+        color: rgba(53, 53, 53, 1);
+        line-height: 62rpx;
+        margin-bottom: 12rpx;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0 40rpx;
+      }
+
+      .p-invite-no {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 68rpx;
+
+        .i-no {
+          width: 52rpx;
+          height: 28rpx;
+          margin-right: 6rpx;
+        }
+        text {
+          font-size: 34rpx;
+          font-family: SFProText-Regular;
+          font-weight: 400;
+          color: rgba(53, 53, 53, 1);
+          line-height: 40rpx;
+        }
+      }
+
+      .p-box {
+        box-sizing: border-box;
+        padding-left: 126rpx;
+        padding-right: 136rpx;
+        .p-box-item {
+          display: flex;
+          // align-items: center;
+          margin-bottom: 12rpx;
+          position: relative;
+          .p-label {
+            width: 128rpx;
+            height: 42rpx;
+            font-size: 30rpx;
+            font-family: SFProText-Regular;
+            font-weight: 400;
+            color: rgba(136, 136, 136, 1);
+            // line-height: 36rpx;
+
+            &.p-label-subscribe {
+              width: 168rpx;
+            }
+          }
+
+          text {
+            flex: 1;
+            font-size: 30rpx;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: rgba(53, 53, 53, 1);
+            line-height: 46rpx;
+            vertical-align: top;
+          }
+
+          .p-vertical-top {
+            // position: absolute;
+            // right: 0;
+            // top: 0;
+            // width: 320rpx;
+            flex: 1;
+            word-break: break-all;
+          }
+
+          &.p-box-item-2 {
+            margin-bottom: 62rpx;
+          }
+        }
+
+        // .p-box-item:nth-child(2) {
+        //   margin-bottom: 62rpx;
+        // }
+      }
+
+      .p-btn {
+        width: 670rpx;
+        height: 96rpx;
+        line-height: 96rpx;
+        text-align: center;
+        margin: 110rpx auto 30rpx;
+        background: rgba(0, 102, 230, 1);
+        border-radius: 10rpx;
+        border: 2rpx solid rgba(5, 5, 5, 0.08);
+        color: #fff;
+        border: none;
+
+        &.p-btn-disabled {
+          background: rgba(0, 102, 230, 0.4);
+        }
+
+        &.p-btn-no {
+          margin-top: 0;
+          background: rgba(248, 248, 248, 1);
+          border: 2rpx solid rgba(5, 5, 5, 0.1);
+          color: #000;
+        }
+      }
+    }
+  }
+}

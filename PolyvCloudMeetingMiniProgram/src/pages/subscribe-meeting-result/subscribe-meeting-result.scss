@@ -1,0 +1,107 @@
+@import "../../common/styles/variable.scss";
+
+page {
+  height: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  .p-container {
+    height: 100%;
+    .p-body {
+      box-sizing: border-box;
+      height: 100%;
+      padding-top: 106rpx;
+      overflow: hidden;
+
+      .i-success {
+        text-align: center;
+        height: 188rpx;
+        image {
+          width: 188rpx;
+          height: 188rpx;
+          margin: 0 auto;
+        }
+      }
+
+      .p-subscribe-result {
+        font-size: 40rpx;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 1);
+        line-height: 1;
+        text-align: center;
+        margin: 36rpx 0 92rpx 0;
+      }
+
+      .p-invite-theme {
+        // height: 74rpx;
+        font-size: 52rpx;
+        font-family: SFProText-Regular;
+        font-weight: 400;
+        color: rgba(53, 53, 53, 1);
+        line-height: 1;
+        margin-bottom: 46rpx;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0 40rpx;
+      }
+
+      .p-box {
+        box-sizing: border-box;
+        padding-left: 126rpx;
+        padding-right: 136rpx;
+        .p-box-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 6rpx;
+          .p-label {
+            width: 170rpx;
+            // height: 42rpx;
+            font-size: 30rpx;
+            font-family: SFProText-Regular;
+            font-weight: 400;
+            color: rgba(136, 136, 136, 1);
+            line-height: 36rpx;
+          }
+
+          text {
+            flex: 1;
+            height: 42rpx;
+            font-size: 30rpx;
+            font-family: SFProText-Regular;
+            font-weight: 400;
+            color: rgba(53, 53, 53, 1);
+            // line-height: 36rpx;
+          }
+        }
+
+        .p-box-item:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .p-btn {
+        width: 670rpx;
+        height: 96rpx;
+        line-height: 96rpx;
+        text-align: center;
+        margin: 106rpx auto 30rpx;
+        background: rgba(0, 102, 230, 1);
+        border-radius: 10rpx;
+        border: 2rpx solid rgba(5, 5, 5, 0.08);
+        color: #fff;
+
+        &.p-btn-no {
+          margin-top: 0;
+          margin-bottom: 0;
+          background: rgba(248, 248, 248, 1);
+          border: 2rpx solid rgba(5, 5, 5, 0.1);
+          color: #000;
+        }
+      }
+
+      .p-btn::after {
+        border: none;
+      }
+    }
+  }
+}

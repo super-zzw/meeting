@@ -1,0 +1,82 @@
+@import "../../common/styles/variable.scss";
+
+page {
+  height: 100%;
+  background-color: #fff;
+  .p-container {
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    .p-body {
+      padding: 32rpx 40rpx 0 40rpx;
+      .p-input-row {
+        position: relative;
+        z-index: 999;
+        height: 96rpx;
+        margin-bottom: 32rpx;
+        display: flex;
+        align-items: center;
+
+        .p-input {
+          width: 670rpx;
+          height: 100%;
+          flex: 1;
+          color: #353535;
+          background-color: #fff;
+        }
+
+        .p-placeholder {
+          font-size: 34rpx;
+          font-family: PingFangSC-Regular;
+          font-weight: 400;
+          color: #b2b2b2;
+        }
+
+        .p-numbers {
+          width: 54rpx;
+          font-size: $size24;
+          font-family: SFProText-Regular;
+          font-weight: 400;
+          color: rgba(136, 136, 136, 1);
+        }
+
+        .picker {
+          width: 100%;
+        }
+      }
+
+      .p-input-row:before {
+        content: "";
+        width: 1340rpx;
+        height: 4px;
+        position: absolute;
+        bottom: 0;
+        z-index: 0;
+        border-bottom: 1px solid #f1f1f1;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        box-sizing: border-box;
+      }
+
+      .p-btn {
+        width: 670rpx;
+        height: 94rpx;
+        line-height: 94rpx;
+        text-align: center;
+        margin-top: 64rpx;
+        background: rgba(0, 102, 230, 1);
+        border-radius: 10rpx;
+        opacity: 0.4;
+        border: 2rpx solid rgba(5, 5, 5, 0.08);
+        font-size: 36rpx;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+
+        &.p-active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

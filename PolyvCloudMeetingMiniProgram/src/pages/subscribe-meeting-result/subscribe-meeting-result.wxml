@@ -1,0 +1,22 @@
+<view class="g-container p-container">
+  <navbar title="保利威云会议" showIcon="{{true}}"></navbar>
+  <view class="p-body">
+    <view class="i-success">
+      <image src="/images/subscribe-meeting/icon-success@2x.png"></image>
+    </view>
+    <view class="p-subscribe-result">预约成功</view>
+    <view class="p-invite-theme g-hidden-text">{{topic}}</view>
+    <view class="p-box">
+      <view class="p-box-item">
+        <view class="p-label">开始时间</view>
+        <text>{{beginTime}}</text>
+      </view>
+      <view class="p-box-item">
+        <view class="p-label">预估时长</view>
+        <text>{{duration}}</text>
+      </view>
+    </view>
+    <button class="p-btn" open-type="share">邀请他人</button>
+    <view class="p-btn p-btn-no" bindtap="noInvite">暂不邀请</view>
+  </view>
+</view>

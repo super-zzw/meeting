@@ -1,0 +1,20 @@
+$hoverColor: #005bac;
+
+@mixin insideLink {
+  transition-duration: 0.4s;
+  transition-property: color, background;
+  cursor: pointer;
+}
+
+$sidebarWidth: 250px;
+
+
+@mixin caret($picUrl: 'assets/images/navbar/btn-more-n.png') {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background: url($picUrl) no-repeat;
+  background-size: cover;
+  vertical-align: middle;
+  margin-left: 2px;
+}
